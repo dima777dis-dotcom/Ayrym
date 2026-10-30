@@ -27,6 +27,26 @@ footer{background:#242820;color:#d8d9d0;padding:30px 0}.footer-row{display:flex;
 @media(max-width:700px){.wrap{width:calc(100% - 36px)}section{padding:76px 0}.nav{height:68px}.nav nav,.nav>.btn{display:none}.menu{display:block}.nav nav.open{display:flex;position:absolute;top:68px;left:18px;right:18px;background:var(--paper);padding:18px;flex-direction:column;gap:17px;border:1px solid var(--line)}.hero{padding:38px 0 55px}.hero-grid,.approach-grid,.calc-grid,.contact-grid{grid-template-columns:1fr}.hero-image{height:390px}.hero h1{font-size:clamp(46px,12vw,66px)}.section-head{display:block}.section-head p{margin-top:14px}.catalog-grid{grid-template-columns:1fr}.product,.product.tall{min-height:360px;grid-row:auto}.approach-image{height:340px}.benefits{gap:15px}.material-grid{grid-template-columns:1fr 1fr}.material{height:190px}.steps{grid-template-columns:1fr 1fr;row-gap:22px}.step{min-height:165px}.step:nth-child(2){border-right:0}.gallery-grid{grid-template-columns:1fr 1fr}.gallery-card{height:230px}.calc-card,.contact-form{padding:22px}.form-grid{grid-template-columns:1fr}.form-grid .field.full{grid-column:auto}.footer-row{align-items:flex-start;flex-direction:column}.footer-row p{text-align:left}.mobile-cta{display:flex;position:fixed;z-index:30;bottom:10px;left:10px;right:10px;padding:7px;background:rgba(248,246,241,.94);backdrop-filter:blur(14px);border:1px solid var(--line)}.mobile-cta .btn{width:100%;min-height:47px}footer{padding-bottom:86px}}
 @media(max-width:430px){.hero-image{height:320px}.actions .btn{width:100%}.material-grid,.gallery-grid{grid-template-columns:1fr}.material{height:220px}.gallery-card{height:260px}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line);margin:0;min-height:0;padding-bottom:18px}.step:last-child{border:0}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* FORMA — material atelier and editorial details */
+.material-atelier{padding:108px 0;background:#242820;color:#f8f6f1;overflow:hidden}
+.material-atelier h2{color:#f8f6f1;max-width:650px}
+.material-atelier .atelier-intro{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}
+.material-atelier .atelier-intro p{color:#c1c2b8;max-width:390px}
+.finish-grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:14px}
+.finish-card{min-height:300px;border-radius:20px;overflow:hidden;position:relative;padding:22px;display:flex;align-items:end;background:#777}
+.finish-card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(20,22,18,.72))}
+.finish-card>*{position:relative}
+.finish-card h3{color:#fff;font-size:24px;margin:0 0 5px}
+.finish-card p{color:#e4e2d9;font-size:13px;margin:0}
+.finish-card.one{background:linear-gradient(135deg,#b7aa91,#e5dfd2 48%,#746d5d)}
+.finish-card.two{background:linear-gradient(135deg,#5d6756,#a6a68c 50%,#303c32)}
+.finish-card.three{background:linear-gradient(135deg,#a77b5a,#d2b99b 50%,#6c594b)}
+.finish-meta{display:flex;justify-content:space-between;gap:16px;margin-top:20px;color:#b9b9ae;font:600 10px "DM Sans",sans-serif;letter-spacing:.14em}
+.furniture-note{margin-top:38px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;gap:30px}
+.furniture-note strong{font-size:clamp(22px,3vw,34px);font-weight:500;max-width:500px;line-height:1.2}
+.furniture-note p{max-width:330px;color:#b9b9ae;font-size:14px}
+@media(max-width:760px){.material-atelier{padding:76px 0}.material-atelier .atelier-intro{display:block}.finish-grid{grid-template-columns:1fr 1fr}.finish-card:first-child{grid-column:span 2;min-height:250px}.finish-card{min-height:220px;padding:18px}.furniture-note{display:block}.furniture-note p{margin-top:14px}}
 </style>
 </head>
 <body>
@@ -58,6 +78,17 @@ footer{background:#242820;color:#d8d9d0;padding:30px 0}.footer-row{display:flex;
 <div class="gallery-card"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" alt="Современная зона хранения"><span>Чистая геометрия</span></div>
 </div></div></section>
 <section class="calc" id="estimate"><div class="wrap calc-grid"><div class="calc-copy"><div class="eyebrow">06 / Предварительный расчёт</div><h2>Сколько может стоить ваш проект?</h2><p>Выберите тип мебели и примерный размер. Калькулятор покажет ориентировочный диапазон для планирования бюджета. Точная стоимость определяется после замера и спецификации.</p></div><div class="calc-card"><div class="field"><label for="kind">Тип мебели</label><select id="kind"><option value="kitchen">Кухня на заказ</option><option value="wardrobe">Встроенный шкаф</option><option value="closet">Гардеробная</option></select></div><div class="field"><label for="length">Размер / длина, пог. м</label><input id="length" type="number" min="1" max="30" step=".5" value="4"></div><div class="field"><label for="level">Уровень комплектации</label><select id="level"><option value="standard">Практичный</option><option value="comfort">Комфорт</option><option value="premium">Премиальный</option></select></div><div class="estimate"><span>Ориентировочный бюджет</span><strong id="result">—</strong><small>Условные ставки для демонстрации. Не оферта и не коммерческая смета.</small></div></div></div></section>
+
+<section class="material-atelier" id="atelier"><div class="wrap">
+<div class="atelier-intro"><div><div class="eyebrow" style="color:#c4c9a9">06 / Материальная библиотека</div><h2>Характер мебели начинается с поверхности.</h2></div><p>Фасад, текстура и тактильность задают настроение всему интерьеру. Подбираем сочетания под архитектуру пространства и привычки владельца.</p></div>
+<div class="finish-grid">
+<article class="finish-card one"><div><h3>Натуральные оттенки</h3><p>Спокойная палитра и выразительная текстура дерева</p></div></article>
+<article class="finish-card two"><div><h3>Матовые поверхности</h3><p>Сдержанный цвет и мягкий визуальный ритм</p></div></article>
+<article class="finish-card three"><div><h3>Тёплые акценты</h3><p>Глубина фактуры и детали с характером</p></div></article>
+</div>
+<div class="finish-meta"><span>WOOD / LACQUER / TEXTURE</span><span>ПАЛИТРА ДЛЯ ПРИМЕРА · СОГЛАСУЕТСЯ С ПОСТАВЩИКАМИ</span></div>
+<div class="furniture-note"><strong>Не каталог готовых решений.<br>А отправная точка для вашего проекта.</strong><p>Финальные образцы, оттенки и фурнитура утверждаются после подбора материалов и проверки доступности у поставщиков.</p></div>
+</div></section>
 <section class="contact" id="contact"><div class="wrap contact-grid"><div class="contact-copy"><div class="eyebrow">07 / Ваш проект</div><h2>Расскажите, какую мебель вы представляете.</h2><p>Оставьте контакты и пару деталей — можно начать с идеи, плана помещения или фотографии интерьера.</p><div class="contact-meta">КОНТАКТЫ ДЕМО-ПРОЕКТА · ЗАМЕНИТЕ НА РЕАЛЬНЫЕ ДАННЫЕ ПЕРЕД ПУБЛИКАЦИЕЙ</div></div><form class="contact-form" id="form"><div class="form-grid"><div class="field"><label for="name">Ваше имя</label><input id="name" name="name" required minlength="2" placeholder="Как к вам обращаться"></div><div class="field"><label for="phone">Телефон</label><input id="phone" name="phone" type="tel" required placeholder="+7 (___) ___-__-__"></div><div class="field"><label for="furniture">Что планируете?</label><select id="furniture" name="furniture"><option>Кухня</option><option>Шкаф</option><option>Гардеробная</option><option>Комплексный проект</option></select></div><div class="field"><label for="budget">Бюджет проекта</label><select id="budget" name="budget"><option>Пока не определён</option><option>До 200 000 ₽</option><option>200 000–500 000 ₽</option><option>500 000–1 000 000 ₽</option><option>От 1 000 000 ₽</option></select></div><div class="field full"><label for="details">Комментарий</label><textarea id="details" name="details" rows="3" placeholder="Размеры, материалы, сроки или пожелания"></textarea></div></div><button class="btn" type="submit">ОТПРАВИТЬ ЗАПРОС ↗</button><p class="note">Демонстрационная форма: данные никуда не отправляются. Для реальных заявок подключите CRM, почту или backend и добавьте согласие на обработку персональных данных.</p><div class="status" id="status" role="status"></div></form></div></section>
 </main>
 <div class="mobile-cta"><a class="btn" href="#contact">ОБСУДИТЬ МОЙ ПРОЕКТ ↗</a></div>
