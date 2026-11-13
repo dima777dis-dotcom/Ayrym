@@ -397,7 +397,7 @@ function enrich(p){
   const grid=v.querySelector('.settings-grid');if(grid){grid.before(section('⚙','Всё под контролем','Персонализируй интерфейс, уведомления и приватность.'));const features=document.createElement('div');features.className='nx-feature-grid';features.append(feature('◐','Внешний вид','Тёмная, светлая и графитовая темы'),feature('◈','Приватность','Настройки видимости профиля'),feature('♢','Уведомления','Управление оповещениями'));grid.before(features)}
  }
 }
-const oldRender=window.render;if(typeof oldRender==='function'){window.render=function(){oldRender();enrich(window.page||'chats')}}
+const oldRender=window.render;if(typeof oldRender==='function'){window.render=function(){oldRender();enrich(typeof page!=='undefined'?page:'chats')}}
 const oldGo=window.go;if(typeof oldGo==='function'){window.go=function(p){oldGo(p);enrich(p);const t=$('topTitle');if(t)t.textContent=({chats:'Сообщения',channels:'Каналы',ai:'NEXUS AI',settings:'Настройки',profile:'Профиль'})[p]||'NEXUS'}}
 document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>enrich(window.page||'chats'),0)});
 })();
