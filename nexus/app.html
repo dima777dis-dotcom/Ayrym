@@ -481,4 +481,53 @@ const title=$('topTitle');if(title)title.textContent=({chats:'Чаты',channels
 </script>
 
 
+
+<style id="nexus-demo-v5">
+@media(max-width:800px){
+.mobile-nav{grid-template-columns:repeat(5,minmax(0,1fr));left:10px;right:10px;bottom:max(8px,env(safe-area-inset-bottom));border:1px solid #2b405a;border-radius:22px;padding:8px 5px max(9px,env(safe-area-inset-bottom));box-shadow:0 12px 35px #0008}
+.mobile-nav button{min-width:0;font-size:10px;font-weight:650;gap:5px;padding:8px 1px;border-radius:14px}
+.mobile-nav button.active{background:#142943;box-shadow:inset 0 2px 0 #6baeff}
+.mobile-nav svg{width:22px;height:22px}
+.app{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+.content{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+.chat-layout{display:block;border:0;border-radius:0;background:transparent;min-height:0;overflow:visible}
+.chat-list{border:0}
+.chat-item{width:100%;min-height:76px;padding:13px 15px;border-top:1px solid #1d2b3d;border-radius:0}
+.conversation.visible{position:fixed;inset:0;z-index:12;display:flex;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.conversation .conv-head{min-height:66px;background:#0d1725;position:sticky;top:0;z-index:2}
+.conversation .composer{padding-bottom:max(12px,env(safe-area-inset-bottom));background:#0d1725}
+}
+.toast{bottom:calc(76px + env(safe-area-inset-bottom));max-width:min(90vw,420px);text-align:center;z-index:30}
+.toast.show{animation:nxToastIn .2s ease-out}
+@keyframes nxToastIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+.chat-item .avatar{border:1px solid #ffffff24;box-shadow:0 3px 12px #0003}
+.chat-item .chat-name{font-size:15px}.chat-item .last{font-size:13px}.chat-item .time{font-size:11px}
+.conv-person{cursor:pointer}.nx-delivery{display:block;text-align:right;font-size:10px;opacity:.8;margin-top:3px}
+.nx-delivery.pending{color:#f2c879}.nx-delivery.sent{color:#a8d2ff}
+.nx-ai-avatar{width:68px;height:68px;margin:0 auto 15px;display:block;filter:drop-shadow(0 8px 20px #277be966)}
+.view-enter{animation:nxPageIn .22s ease both}@keyframes nxPageIn{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.view-enter,.toast.show{animation:none}}
+</style>
+<script id="nexus-demo-v5-script">
+(()=>{
+const $=id=>document.getElementById(id);
+window.toast=function(message){const el=$('toast');if(!el)return;el.textContent=message;el.classList.add('show');clearTimeout(window.__nxToastTimer);window.__nxToastTimer=setTimeout(()=>el.classList.remove('show'),2400)};
+try{chats.forEach(c=>{if(!c.type)c.type=(c.id===1||/команда|групп/i.test(c.name))?'group':'personal';if(!Array.isArray(c.messages))c.messages=[]})}catch(e){}
+window.__nxOutbox=[];try{window.__nxOutbox=JSON.parse(localStorage.getItem('nexusOutbox')||'[]')}catch(e){}
+const saveOutbox=()=>{try{localStorage.setItem('nexusOutbox',JSON.stringify(window.__nxOutbox))}catch(e){}};
+const baseRenderChats=renderChats;
+renderChats=function(v){baseRenderChats(v);const list=$('chatItems');if(list)list.querySelectorAll('.chat-item').forEach(b=>{const name=b.querySelector('.chat-name')?.textContent;const c=chats.find(x=>x.name===name);if(c)b.dataset.chatId=c.id})};
+const baseOpenChat=openChat;
+openChat=function(id,show=true){
+baseOpenChat(id,show);if(!show)return;
+const chat=chats.find(c=>String(c.id)===String(id)),list=$('msgList'),form=$('composer');if(!chat||!list||!form)return;
+chat.unread=0;saveChats();
+const avatar=$('conversation')?.querySelector('.conv-head .avatar');if(avatar){avatar.style.cursor='pointer';avatar.title='Открыть профиль';avatar.onclick=()=>showOtherProfile(id)}
+form.onsubmit=e=>{e.preventDefault();const input=$('msgInput'),value=input?.value.trim();if(!value)return;const now=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),online=navigator.onLine;chat.messages.push([value,true,now,online?'sent':'pending']);chat.last=value;chat.time=now;saveChats();const bubble=document.createElement('div');bubble.className='bubble mine';bubble.innerHTML=esc(value)+'<time>'+now+'</time><small class="nx-delivery '+(online?'sent':'pending')+'">'+(online?'✓✓ Отправлено в демо':'◷ Ожидает подключения')+'</small>';list.append(bubble);list.scrollTop=list.scrollHeight;input.value='';if(!online){window.__nxOutbox.push({chatId:chat.id,text:value,time:now});saveOutbox();toast('Сообщение сохранено на устройстве')}else toast('Сообщение отправлено в демо');const rows=$('chatItems');if(rows){const row=[...rows.querySelectorAll('.chat-item')].find(x=>String(x.dataset.chatId)===String(chat.id));if(row){const preview=row.querySelector('.last');if(preview)preview.textContent=value;const time=row.querySelector('.time');if(time)time.textContent='сейчас';rows.prepend(row)}}};
+};
+function flushOutbox(){if(!navigator.onLine||!window.__nxOutbox.length)return;const count=window.__nxOutbox.length;window.__nxOutbox.forEach(item=>{const c=chats.find(x=>String(x.id)===String(item.chatId));if(c){const m=c.messages.find(x=>x[0]===item.text&&x[2]===item.time);if(m)m[3]='sent'}});window.__nxOutbox=[];saveOutbox();saveChats();toast(count+' сообщ. отмечено отправленными (демо)')}
+window.addEventListener('online',flushOutbox);window.addEventListener('offline',()=>toast('Нет интернета. Сообщения будут сохранены локально.'));
+const oldAI=renderAI;renderAI=function(v){oldAI(v);const orb=v.querySelector('.ai-orb');if(orb)orb.innerHTML='<svg class="nx-ai-avatar" viewBox="0 0 80 80" role="img" aria-label="Аватар NEXUS AI"><defs><linearGradient id="nxOrb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7bc6ff"/><stop offset="1" stop-color="#2857bc"/></linearGradient></defs><circle cx="40" cy="40" r="36" fill="url(#nxOrb)"/><path d="M25 34c0-10 7-17 15-17s15 7 15 17v9c0 11-7 18-15 18s-15-7-15-18z" fill="#102b55" stroke="#bde3ff" stroke-width="2"/><path d="M30 37h5m10 0h5" stroke="#dff4ff" stroke-width="4" stroke-linecap="round"/><path d="M33 49q7 6 14 0" fill="none" stroke="#8fd2ff" stroke-width="2.5" stroke-linecap="round"/><path d="M40 8v-5m29 37h5M7 40H2" stroke="#d5efff" stroke-width="2" stroke-linecap="round"/></svg>'};
+})();
+</script>
 </body></html>
