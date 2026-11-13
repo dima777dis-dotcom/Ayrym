@@ -530,4 +530,54 @@ window.addEventListener('online',flushOutbox);window.addEventListener('offline',
 const oldAI=renderAI;renderAI=function(v){oldAI(v);const orb=v.querySelector('.ai-orb');if(orb)orb.innerHTML='<svg class="nx-ai-avatar" viewBox="0 0 80 80" role="img" aria-label="Аватар NEXUS AI"><defs><linearGradient id="nxOrb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7bc6ff"/><stop offset="1" stop-color="#2857bc"/></linearGradient></defs><circle cx="40" cy="40" r="36" fill="url(#nxOrb)"/><path d="M25 34c0-10 7-17 15-17s15 7 15 17v9c0 11-7 18-15 18s-15-7-15-18z" fill="#102b55" stroke="#bde3ff" stroke-width="2"/><path d="M30 37h5m10 0h5" stroke="#dff4ff" stroke-width="4" stroke-linecap="round"/><path d="M33 49q7 6 14 0" fill="none" stroke="#8fd2ff" stroke-width="2.5" stroke-linecap="round"/><path d="M40 8v-5m29 37h5M7 40H2" stroke="#d5efff" stroke-width="2" stroke-linecap="round"/></svg>'};
 })();
 </script>
+
+<script id="nexus-channel-posts">
+(()=>{
+const original=renderChannels;
+const posts=[
+[
+['NEXUS стал ближе','Мы обновили интерфейс диалогов: теперь переписки открываются на весь экран, а навигация стала проще.','Сегодня · 12:40','Обновления'],
+['Что дальше?','Готовим улучшенную синхронизацию, резервное копирование и удобную работу с несколькими устройствами.','Вчера · 18:20','Разработка'],
+['Добро пожаловать','Это официальный канал NEXUS. Здесь будут появляться новости продукта и важные изменения.','10 ноября · 09:15','Команда']
+],
+[
+['Небольшая привычка для фокуса','Отключи лишние уведомления на 25 минут и оставь только важные диалоги.','Сегодня · 10:30','Практика'],
+['Локальное хранение','Офлайн-очередь помогает не потерять черновик сообщения при нестабильной сети.','Вчера · 16:05','Технологии'],
+['Будущее связи','Хороший интерфейс должен оставаться понятным даже тогда, когда интернет пропадает.','9 ноября · 14:10','Мысли']
+],
+[
+['Детали имеют значение','Ритм отступов, контраст и размер текста влияют на ощущение качества сильнее, чем лишние эффекты.','Сегодня · 11:05','Дизайн'],
+['Меньше шума','Убираем декоративные элементы, которые не помогают пользователю выполнить действие.','Вчера · 19:40','Принципы'],
+['Мобильный first','Каждый экран NEXUS сначала проектируется для телефона, а затем масштабируется на большой экран.','8 ноября · 13:25','Интерфейс']
+],
+[
+['Открытие недели','Новые инструменты машинного обучения всё чаще становятся полезными прямо в повседневных приложениях.','Сегодня · 08:50','Наука'],
+['Почему важны данные','Качество результата начинается с того, насколько хорошо собрана и проверена информация.','Вчера · 12:15','Исследования'],
+['Маленький эксперимент','Попробуй объяснить сложную идею в трёх предложениях — это отличный тест понимания.','7 ноября · 17:00','Идеи']
+]
+];
+renderChannels=function(v){
+ original(v);
+ const root=$('channelCards');if(!root)return;
+ root.querySelectorAll('.channel-row').forEach(row=>{
+  const title=row.querySelector('.channel-title')?.childNodes[0]?.textContent?.trim();
+  const index=Math.max(0,channels.findIndex(c=>c[0]===title));
+  const open=()=>showFeed(index);
+  row.querySelector('.channel-copy')?.addEventListener('click',open);
+  row.querySelector('.channel-art')?.addEventListener('click',open);
+  row.querySelector('.channel-copy').style.cursor='pointer';
+  row.querySelector('.channel-art').style.cursor='pointer';
+ });
+ function showFeed(index){
+  const channel=channels[index],items=posts[index]||posts[0],modal=document.createElement('section');
+  modal.className='nx-channel-screen';
+  modal.innerHTML='<header class="nx-channel-head"><button class="topbtn" id="nxChannelBack" aria-label="Назад">←</button><div><b>'+esc(channel[0])+'</b><small>'+esc(channel[2])+' подписчиков</small></div></header><div class="nx-post-list">'+items.slice(0,3).map((p,i)=>'<article class="nx-post"><div class="nx-post-label">'+esc(p[3])+' · '+esc(p[2])+'</div><h3>'+esc(p[0])+'</h3><p>'+esc(p[1])+'</p><div class="nx-post-actions"><button data-like="'+i+'">♡ Нравится <span>0</span></button><button data-share="'+i+'">↗ Поделиться</button></div></article>').join('')+'</div><p class="nx-channel-foot">Показаны последние 3 публикации · демо-режим</p>';
+  document.body.append(modal);
+  modal.querySelector('#nxChannelBack').onclick=()=>modal.remove();
+  modal.addEventListener('click',e=>{const like=e.target.closest('[data-like]');if(like){const n=Number(like.querySelector('span').textContent)||0;like.querySelector('span').textContent=String(n+1);like.classList.add('liked')}const share=e.target.closest('[data-share]');if(share){const p=items[Number(share.dataset.share)];const txt=channel[0]+' — '+p[0]+': '+p[1];if(navigator.share)navigator.share({title:p[0],text:txt}).catch(()=>{});else if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(()=>toast('Текст публикации скопирован')).catch(()=>toast('Не удалось скопировать'));else toast('Поделиться можно после подключения браузерного API')}});
+ }
+};
+const style=document.createElement('style');style.textContent='.nx-channel-screen{position:fixed;inset:0;z-index:20;background:var(--bg);overflow:auto;animation:nxPageIn .2s ease}.nx-channel-head{height:68px;position:sticky;top:0;display:flex;align-items:center;gap:13px;padding:10px 16px;background:#0d1725ee;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nx-channel-head b,.nx-channel-head small{display:block}.nx-channel-head small{color:var(--muted);font-size:11px;margin-top:2px}.nx-post-list{max-width:760px;margin:0 auto;padding:16px;display:grid;gap:13px}.nx-post{background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:18px}.nx-post-label{font-size:11px;color:#83baff;letter-spacing:.04em}.nx-post h3{font-size:18px;margin:10px 0 7px}.nx-post p{color:var(--muted);line-height:1.65;margin:0}.nx-post-actions{display:flex;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}.nx-post-actions button{border:0;background:transparent;color:#9eb4cc;padding:7px 4px}.nx-post-actions button.liked{color:#82baff}.nx-channel-foot{text-align:center;color:var(--muted);font-size:11px;padding:0 15px 25px}';document.head.append(style);
+})();
+</script>
 </body></html>
