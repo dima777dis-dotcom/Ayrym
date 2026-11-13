@@ -90,6 +90,29 @@ body.light .mobile-nav button.active{color:#286bd8}
  .ai-hero{padding-top:30px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Five-tab mobile navigation */
+@media(max-width:800px){
+ .mobile-nav{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;padding:8px 5px max(9px,env(safe-area-inset-bottom));}
+ .mobile-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-width:0;min-height:54px;padding:4px 1px;border:0;border-radius:12px;background:transparent;color:#8494a9;font-size:10px;font-weight:650;white-space:nowrap}
+ .mobile-nav button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s,filter .2s}
+ .mobile-nav button.active{color:#78b5ff;background:linear-gradient(180deg,#17365a66,#17365a12);box-shadow:inset 0 2px #68aaff}
+ .mobile-nav button.active svg{color:#78b5ff;filter:drop-shadow(0 0 7px #438fff99);transform:translateY(-2px)}
+ .content{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+}
+body.graphite{--bg:#17191d;--surface:#22262c;--surface2:#292e35;--surface3:#1d2127;--line:#3a4049;--text:#e4e7eb;--muted:#a0a6af;--blue:#8fb8e8;--blue2:#657f9e;background:#17191d}
+body.graphite .side,body.graphite .topbar,body.graphite .mobile-nav{background:#1d2025}
+body.graphite .panel,body.graphite .chat-list,body.graphite .conversation,body.graphite .conv-head,body.graphite .composer,body.graphite .settings-menu,body.graphite .settings-body{background:#22262c;box-shadow:none}
+body.graphite .chat-item:hover,body.graphite .chat-item.selected,body.graphite .settings-menu button.active{background:#303640}
+body.graphite .chat-item.selected:before{background:#8fb8e8}
+body.graphite .bubble{background:#30353d;border-color:#454c56;box-shadow:none}
+body.graphite .bubble.mine{background:#46515f;border-color:#5b6878}
+body.graphite .primary{background:#596575;box-shadow:none}
+body.graphite .topbtn,body.graphite .pill,body.graphite .secondary,body.graphite .search input,body.graphite .field input,body.graphite .field textarea,body.graphite .composer input,body.graphite .ai-input textarea{background:#292e35;border-color:#424954;box-shadow:none}
+body.graphite .profile-hero{background:linear-gradient(135deg,#30363f,#20242a)}
+body.graphite .cover-orbit{border-color:#9aa4b122}
+body.graphite .ai-orb{box-shadow:0 0 0 8px #9aa4b10d,0 0 34px #8994a522}
+body.graphite .mobile-nav button.active{color:#78b5ff;background:#27303a;box-shadow:inset 0 2px #68aaff}
 </style></head><body>
 <div class="app">
 <aside class="side"><div class="brand"><span class="mark">N</span>NEXUS</div><nav class="nav" id="sideNav">
@@ -100,7 +123,7 @@ body.light .mobile-nav button.active{color:#286bd8}
 </nav><div class="side-bottom"><button data-page="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 13a7 7 0 0 0 0-2l2-1.5-2-3.5-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5L9 6a7 7 0 0 0-1.7 1L5 6 3 9.5 5 11a7 7 0 0 0 0 2l-2 1.5L5 18l2.3-1a7 7 0 0 0 1.7 1l.5 3h5l.5-3a7 7 0 0 0 1.7-1l2.4 1 2-3.5z"/></svg>Настройки</button></div><div class="user-mini"><div class="mini-avatar" id="miniAvatar">D</div><div><b id="miniName">Дмитрий</b><small id="miniUser">@dmitry_nexus</small></div></div></aside>
 <main class="main"><header class="topbar"><div class="mobile-brand"><span class="mark">N</span>NEXUS</div><div class="page-title" id="topTitle">Чаты</div><div class="top-actions"><button class="topbtn" id="searchFocus" aria-label="Поиск"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><button class="topbtn" id="gear" aria-label="Настройки"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 13a7 7 0 0 0 0-2l2-1.5-2-3.5-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5L9 6a7 7 0 0 0-1.7 1L5 6 3 9.5 5 11a7 7 0 0 0 0 2l-2 1.5L5 18l2.3-1a7 7 0 0 0 1.7 1l.5 3h5l.5-3a7 7 0 0 0 1.7-1l2.4 1 2-3.5z"/></svg></button></div></header>
 <div class="content" id="view"></div></main></div>
-<nav class="mobile-nav" id="mobileNav"><button data-page="chats" class="active"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 3z"/></svg>Чаты</button><button data-page="channels"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h11"/></svg>Каналы</button><button data-page="ai"><svg viewBox="0 0 24 24"><path d="m12 2 2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>AI</button><button data-page="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Профиль</button></nav><div class="toast" id="toast"></div>
+<nav class="mobile-nav" id="mobileNav"><button data-page="chats" class="active"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 3z"/></svg>Чаты</button><button data-page="channels"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h11"/></svg>Каналы</button><button data-page="ai"><svg viewBox="0 0 24 24"><path d="m12 2 2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>AI</button><button data-page="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 13a7 7 0 0 0 0-2l2-1.5-2-3.5-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5L9 6a7 7 0 0 0-1.7 1L5 6 3 9.5 5 11a7 7 0 0 0 0 2l-2 1.5L5 18l2.3-1a7 7 0 0 0 1.7 1l.5 3h5l.5-3a7 7 0 0 0 1.7-1l2.4 1 2-3.5z"/></svg>Настройки</button><button data-page="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Профиль</button></nav><div class="toast" id="toast"></div>
 <script>
 const $=id=>document.getElementById(id),$$=selector=>Array.from(document.querySelectorAll(selector));let page='chats',activeChat=0,viewedUserId=null,settingsTab='general',aiHistory=[],profile={name:'Дмитрий',user:'dmitry_nexus',bio:'На связи. Исследую новые идеи и создаю своё.',photo:''};
 const chats=[
@@ -115,7 +138,7 @@ try{const stored=JSON.parse(localStorage.getItem('nexusChats')||'null');if(Array
 function saveChats(){try{localStorage.setItem('nexusChats',JSON.stringify(chats))}catch(e){toast('Не удалось сохранить историю на устройстве')}}
 
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
-function go(p){page=p;document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));$('topTitle').textContent=({chats:'Чаты',channels:'Каналы',ai:'NEXUS AI',profile:'Профиль',settings:'Настройки'})[p];render();window.scrollTo(0,0)}
+function go(p){page=p;document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p||(p==='userProfile'&&b.dataset.page==='profile')));$('topTitle').textContent=({chats:'Чаты',channels:'Каналы',ai:'NEXUS AI',profile:'Профиль',settings:'Настройки'})[p];render();window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(b.dataset.page));$('gear').onclick=()=>go('settings');
 function render(){const v=$('view');try{if(page==='chats')renderChats(v);else if(page==='channels')renderChannels(v);else if(page==='ai')renderAI(v);else if(page==='profile')renderProfile(v);else if(page==='userProfile')renderOtherProfile(v);else if(page==='settings')renderSettings(v)}catch(err){console.error('NEXUS render error:',err);v.innerHTML='<section class="panel" style="padding:22px;margin-top:20px"><h2>Не удалось открыть раздел</h2><p style="color:var(--muted)">Ошибка интерфейса: '+esc(err&&err.message?err.message:'неизвестная ошибка')+'</p><button class="primary" onclick="location.reload()">Перезагрузить</button></section>'}}
 function renderChats(v){v.innerHTML='<h1 class="heading">Твои разговоры.</h1><p class="sub">Личные сообщения и группы — всё в одном месте.</p><div class="toolbar"><div class="search"><input id="chatSearch" placeholder="Поиск по чатам и сообщениям"></div><button class="pill" id="newChat">＋ Новый чат</button></div><div class="panel chat-layout"><div class="chat-list"><div class="list-head">Все сообщения <span style="color:var(--muted);font-weight:400">· '+chats.length+'</span></div><div id="chatItems"></div></div><section class="conversation" id="conversation"><div class="empty"><strong>Выбери диалог</strong>Твои сообщения появятся здесь.</div></section></div>';
