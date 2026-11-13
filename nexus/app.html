@@ -208,6 +208,78 @@ body{background:radial-gradient(ellipse at 72% -15%,rgba(46,116,190,.19),transpa
 @media(max-width:390px){.content{padding-left:11px;padding-right:11px}.heading{font-size:24px}.nx-story{min-width:59px}.nx-feature-grid{gap:8px}.nx-feature{padding:12px}}
 @media(prefers-reduced-motion:reduce){.nx-section,.view-enter,.ai-orb,.ai-hero:before,.ai-hero:after{animation:none!important}}
 
+
+/* Editorial messenger layout — full-width Telegram-like conversation flow */
+.content{max-width:none;width:100%;padding:22px clamp(14px,2.4vw,34px) 38px}
+.messenger-page{width:100%;max-width:1120px;margin:0 auto;min-height:calc(100dvh - 150px)}
+.messenger-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}
+.messenger-heading .sub{margin:3px 0 0;font-size:13px}
+.compose-btn{width:44px;height:44px;display:grid;place-items:center;border:1px solid #35516c;border-radius:14px;background:#172a40;color:#dcecff;transition:background .2s,transform .2s}
+.compose-btn:hover{background:#214466;transform:translateY(-2px)}
+.compose-btn svg{width:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toolbar{margin:0 0 13px}.search{display:flex;align-items:center;gap:10px;padding:0 13px;min-height:46px;border-radius:13px;background:#101d2b;border:1px solid #2a4056}
+.search>svg{width:18px;height:18px;flex:0 0 18px;fill:none;stroke:#8da4bc;stroke-width:1.8}
+.search input{border:0!important;background:transparent!important;padding:11px 0!important;box-shadow:none!important}
+.chat-filters,.channel-tabs{display:flex;gap:7px;overflow:auto;padding:3px 0 13px;scrollbar-width:none}
+.chat-filters button,.channel-tabs button{white-space:nowrap;border:1px solid transparent;background:transparent;color:#94a8bd;padding:8px 14px;border-radius:10px;font-size:13px}
+.chat-filters button.active,.channel-tabs button.active{background:#1b3550;border-color:#355775;color:#e5f2ff}
+.chat-filters button span{margin-left:4px;color:#85baff}
+.chat-layout{display:block;min-height:0;border-radius:16px;background:#0e1926;overflow:hidden}
+.chat-list{border:0;width:100%}
+.chat-item{min-height:76px;padding:13px 18px;border-top:1px solid rgba(55,78,101,.42);transition:background .16s}
+.chat-item:first-child{border-top:0}
+.chat-item:hover{background:#16283b}
+.chat-item .avatar{width:50px;height:50px;border-radius:50%;font-size:17px}
+.chat-name{font-size:14px;letter-spacing:.005em}
+.last{font-size:12px;color:#91a5ba}
+.chat-empty{padding:34px;text-align:center;color:#91a5ba}
+.conversation-screen{display:none;position:fixed;z-index:20;inset:0;background:#0a1421;min-height:100dvh;height:100dvh;max-width:none;border:0;border-radius:0;overflow:hidden}
+.conversation-screen.visible{display:flex;animation:conversationIn .2s ease-out}
+@keyframes conversationIn{from{opacity:.75;transform:translateX(12px)}to{opacity:1;transform:none}}
+.conversation-screen .conv-head{min-height:68px;padding:10px max(16px,env(safe-area-inset-left));background:#101d2b;border-bottom:1px solid #2a3d52}
+.conversation-screen .backChats{display:grid;place-items:center;border:0;background:transparent;width:38px}
+.conversation-screen .backChats svg,.conv-tools svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.conv-person{cursor:pointer;min-width:0}.conv-person b{font-size:14px}.conv-person small{display:block;color:#79b99a;font-size:11px;margin-top:3px}
+.conv-tools{margin-left:auto;display:flex;gap:7px}.conv-tools .topbtn{border:0;background:transparent}
+.conversation-screen .messages{flex:1;min-height:0;overflow-y:auto;padding:22px max(16px,calc((100vw - 820px)/2));background-color:#0b1724;background-image:radial-gradient(#7899b71a .7px,transparent .7px);background-size:22px 22px}
+.conversation-screen .bubble{max-width:min(76%,560px);line-height:1.5;font-size:14px}
+.conversation-screen .composer{padding:12px max(14px,calc((100vw - 820px)/2)) max(12px,env(safe-area-inset-bottom));background:#101d2b;border-top:1px solid #2a3d52}
+.conversation-screen .composer input{background:#0a1521;border-color:#30465e;border-radius:22px;padding:13px 17px}
+.attach-btn{width:40px;flex:0 0 40px;border:0;background:transparent;color:#9bb1c8;display:grid;place-items:center}
+.attach-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.conversation-screen .send{width:43px;height:43px;border-radius:50%}
+.channel-tabs{padding-top:2px}
+.channel-feed{width:100%;border:1px solid #293e54;border-radius:16px;background:#0f1b29;overflow:hidden}
+.channel-row{display:flex;align-items:center;gap:16px;padding:17px 19px;border-bottom:1px solid #26394d;min-height:112px;transition:background .18s}
+.channel-row:last-child{border-bottom:0}.channel-row:hover{background:#142438}
+.channel-art{width:66px;height:66px;flex:0 0 66px}
+.channel-art svg{width:100%;height:100%;display:block}
+.channel-copy{flex:1;min-width:0}.channel-title{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:720;color:#e7f0fa}
+.verified-mark{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#367ec0}
+.verified-mark svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.channel-meta{font-size:11px;color:#8399b1;margin-top:4px}.channel-meta span{padding:0 4px;color:#526b84}
+.channel-copy p{font-size:12px;line-height:1.45;color:#a1b1c3;margin:7px 0 0}
+.follow-btn{flex:0 0 auto;min-width:112px;padding:9px 13px;border:1px solid #4d8bc5;border-radius:10px;background:#245b8e;color:#fff;font-size:12px;font-weight:650}
+.follow-btn.following{background:transparent;border-color:#40566e;color:#9eb1c5}
+.feed-empty{padding:45px 20px;text-align:center;display:flex;align-items:center;flex-direction:column;gap:8px;color:#93a8bd}
+.feed-empty b{font-size:14px;color:#dce8f4}.feed-empty span{font-size:12px}
+.empty-drawing{width:120px;height:100px;margin-bottom:5px}
+.empty-drawing svg{width:100%;height:100%}
+@media(max-width:800px){
+ .content{padding:16px 0 calc(92px + env(safe-area-inset-bottom))}
+ .messenger-page{min-height:calc(100dvh - 140px)}
+ .messenger-heading{padding:0 16px 2px}.messenger-heading .heading{font-size:23px}
+ .messenger-page>.toolbar,.messenger-page>.chat-filters,.messenger-page>.channel-tabs{margin-left:14px;margin-right:14px}
+ .chat-layout,.channel-feed{border-left:0;border-right:0;border-radius:0}
+ .chat-item{padding:13px 16px;min-height:76px}
+ .channel-row{padding:14px 15px;gap:12px;min-height:104px}
+ .channel-art{width:54px;height:54px;flex-basis:54px}
+ .channel-copy p{font-size:11px}
+ .follow-btn{min-width:94px;padding:8px 9px}
+ .conversation-screen .conv-head{padding-top:max(10px,env(safe-area-inset-top))}
+}
+@media(max-width:390px){.channel-row{gap:9px;padding:12px 10px}.channel-art{width:48px;height:48px;flex-basis:48px}.follow-btn{min-width:82px;font-size:11px}.channel-title{font-size:13px}}
+
 </style></head><body>
 <div class="app">
 <aside class="side"><div class="brand"><span class="mark">N</span>NEXUS</div><nav class="nav" id="sideNav">
@@ -236,10 +308,31 @@ function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setT
 function go(p){page=p;document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p||(p==='userProfile'&&b.dataset.page==='profile')));$('topTitle').textContent=({chats:'Чаты',channels:'Каналы',ai:'NEXUS AI',profile:'Профиль',settings:'Настройки'})[p];render();window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(b.dataset.page));$('gear').onclick=()=>go('settings');
 function render(){const v=$('view');try{if(page==='chats')renderChats(v);else if(page==='channels')renderChannels(v);else if(page==='ai')renderAI(v);else if(page==='profile')renderProfile(v);else if(page==='userProfile')renderOtherProfile(v);else if(page==='settings')renderSettings(v)}catch(err){console.error('NEXUS render error:',err);v.innerHTML='<section class="panel" style="padding:22px;margin-top:20px"><h2>Не удалось открыть раздел</h2><p style="color:var(--muted)">Ошибка интерфейса: '+esc(err&&err.message?err.message:'неизвестная ошибка')+'</p><button class="primary" onclick="location.reload()">Перезагрузить</button></section>'}}
-function renderChats(v){v.innerHTML='<h1 class="heading">Твои разговоры.</h1><p class="sub">Личные сообщения и группы — всё в одном месте.</p><div class="toolbar"><div class="search"><input id="chatSearch" placeholder="Поиск по чатам и сообщениям"></div><button class="pill" id="newChat">＋ Новый чат</button></div><div class="panel chat-layout"><div class="chat-list"><div class="list-head">Все сообщения <span style="color:var(--muted);font-weight:400">· '+chats.length+'</span></div><div id="chatItems"></div></div><section class="conversation" id="conversation"><div class="empty"><strong>Выбери диалог</strong>Твои сообщения появятся здесь.</div></section></div>';
-function fill(q=''){const list=$('chatItems');list.innerHTML='';chats.filter(c=>(c.name+c.last+c.user+(c.messages||[]).map(m=>m[0]).join(' ')).toLowerCase().includes(q.toLowerCase())).forEach(c=>{const b=document.createElement('button');b.className='chat-item'+(c.id===activeChat?' selected':'');b.innerHTML='<div class="avatar" style="background:'+c.color+'">'+c.initial+'</div><div class="chat-meta"><div class="chat-line"><span class="chat-name">'+esc(c.name)+'</span><span class="time">'+c.time+'</span></div><div class="chat-line"><div class="last">'+esc(c.last)+'</div>'+(c.unread?'<span class="unread">'+c.unread+'</span>':'')+'</div></div>';b.onclick=()=>openChat(c.id);list.append(b)})}
-fill();$('chatSearch').oninput=e=>fill(e.target.value);$('newChat').onclick=()=>{const name=prompt('Имя нового собеседника');if(!name||!name.trim())return;const n=name.trim();const id=Math.max(0,...chats.map(x=>Number(x.id)||0))+1;chats.unshift({id,name:n,user:'Локальный чат',initial:n[0].toUpperCase(),color:'linear-gradient(145deg,#397fba,#203b60)',time:'сейчас',last:'Новый диалог',unread:0,messages:[['Это начало вашего диалога.',false,'сейчас']]});saveChats();activeChat=id;renderChats($('view'));openChat(id);toast('Новый локальный чат создан')};if(activeChat!==null)openChat(activeChat,false)}
-function openChat(id,show=true){activeChat=id;const c=chats.find(x=>x.id===id);if(!c)return;const el=$('conversation');if(!el)return;el.classList.toggle('open',show&&innerWidth<=800);el.innerHTML='<div class="conv-head"><button class="topbtn backChats" aria-label="Назад">‹</button><div class="avatar" style="width:39px;height:39px;background:'+c.color+'">'+c.initial+'</div><div><b>'+esc(c.name)+'</b><small>в сети</small></div></div><div class="messages" id="msgList"></div><form class="composer" id="composer"><input id="msgInput" placeholder="Написать сообщение…" autocomplete="off"><button class="send" aria-label="Отправить"><svg viewBox="0 0 24 24"><path d="m4 4 17 8-17 8 3-8zM7 12h14"/></svg></button></form>';const back=el.querySelector('.backChats');if(back)back.onclick=()=>{el.classList.remove('open');activeChat=null};const head=el.querySelector('.conv-head');if(head){head.style.cursor='pointer';head.onclick=()=>showOtherProfile(id)}const list=$('msgList');c.messages.forEach(m=>addBubble(list,m[0],m[1],m[2]));list.scrollTop=list.scrollHeight;$('composer').onsubmit=e=>{e.preventDefault();const inp=$('msgInput'),t=inp.value.trim();if(!t)return;c.messages.push([t,true,new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})]);c.last=t;c.time='сейчас';saveChats();addBubble(list,t,true,'сейчас');list.scrollTop=list.scrollHeight;inp.value='';renderChatListOnly()};}
+function renderChats(v){
+v.innerHTML='<div class="messenger-page"><div class="messenger-heading"><div><h1 class="heading">Сообщения</h1><p class="sub">Все твои диалоги в одном месте</p></div><button class="compose-btn" id="newChat" aria-label="Новое сообщение"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="toolbar"><div class="search"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="chatSearch" placeholder="Поиск"></div></div><div class="chat-filters" id="chatFilters"><button class="active" data-filter="all">Все <span>'+chats.length+'</span></button><button data-filter="personal">Личные</button><button data-filter="groups">Группы</button></div><div class="panel chat-layout"><div class="chat-list"><div id="chatItems"></div><div class="chat-empty" id="chatEmpty" hidden>Ничего не найдено</div></div></div></div><section class="conversation conversation-screen" id="conversation" aria-hidden="true"></section>';
+let filter='all';
+function fill(q=''){
+const list=$('chatItems');list.innerHTML='';
+const filtered=chats.filter(c=>{const group=/команда|групп|участник|team/i.test(c.name+' '+c.user);const matches=filter==='all'||(filter==='groups'?group:!group);return matches&&(c.name+c.last+c.user+(c.messages||[]).map(m=>m[0]).join(' ')).toLowerCase().includes(q.toLowerCase())});
+filtered.forEach(c=>{const b=document.createElement('button');b.className='chat-item';b.innerHTML='<div class="avatar" style="background:'+c.color+'">'+esc(c.initial)+'</div><div class="chat-meta"><div class="chat-line"><span class="chat-name">'+esc(c.name)+'</span><span class="time">'+esc(c.time)+'</span></div><div class="chat-line"><div class="last">'+esc(c.last)+'</div>'+(c.unread?'<span class="unread">'+c.unread+'</span>':'')+'</div></div>';b.onclick=()=>openChat(c.id,true);list.append(b)});
+$('chatEmpty').hidden=filtered.length>0;
+}
+fill();$('chatSearch').oninput=e=>fill(e.target.value);
+$('chatFilters').querySelectorAll('button').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;$('chatFilters').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));fill($('chatSearch').value)});
+$('newChat').onclick=()=>{const name=prompt('Имя нового собеседника');if(!name||!name.trim())return;const n=name.trim();const id=Math.max(0,...chats.map(x=>Number(x.id)||0))+1;chats.unshift({id,name:n,user:'Личный чат',initial:n[0].toUpperCase(),color:'linear-gradient(145deg,#397fba,#203b60)',time:'сейчас',last:'Новый диалог',unread:0,messages:[['Это начало вашего диалога.',false,'сейчас']]});saveChats();fill($('chatSearch').value);openChat(id,true);toast('Новый диалог создан')};
+}
+function openChat(id,show=true){
+activeChat=id;const chat=chats.find(x=>x.id===id);if(!chat)return;
+const el=$('conversation');if(!el)return;
+if(!show){el.classList.remove('visible');el.setAttribute('aria-hidden','true');return}
+el.classList.add('visible');el.setAttribute('aria-hidden','false');
+el.innerHTML='<div class="conv-head"><button class="topbtn backChats" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div class="avatar" style="width:42px;height:42px;background:'+chat.color+'">'+esc(chat.initial)+'</div><div class="conv-person"><b>'+esc(chat.name)+'</b><small>в сети</small></div><div class="conv-tools"><button class="topbtn" aria-label="Поиск в чате"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><button class="topbtn" aria-label="Ещё"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div></div><div class="messages" id="msgList"></div><form class="composer" id="composer"><button type="button" class="attach-btn" aria-label="Прикрепить файл"><svg viewBox="0 0 24 24"><path d="m8 12.5 7.2-7.2a4 4 0 0 1 5.6 5.6l-9.2 9.2a6 6 0 0 1-8.5-8.5l8.8-8.8"/></svg></button><input id="msgInput" placeholder="Сообщение…" autocomplete="off"><button class="send" aria-label="Отправить"><svg viewBox="0 0 24 24"><path d="m4 4 17 8-17 8 3-8zM7 12h14"/></svg></button></form>';
+el.querySelector('.backChats').onclick=()=>{el.classList.remove('visible');el.setAttribute('aria-hidden','true');activeChat=null};
+el.querySelector('.conv-person').onclick=()=>showOtherProfile(id);
+const list=$('msgList');chat.messages.forEach(m=>addBubble(list,m[0],m[1],m[2]));list.scrollTop=list.scrollHeight;
+$('composer').onsubmit=e=>{e.preventDefault();const inp=$('msgInput'),t=inp.value.trim();if(!t)return;chat.messages.push([t,true,new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})]);chat.last=t;chat.time='сейчас';saveChats();addBubble(list,t,true,'сейчас');list.scrollTop=list.scrollHeight;inp.value=''};
+}
+
 function showOtherProfile(id){viewedUserId=id;page='userProfile';$('topTitle').textContent='Профиль';render()}
 function renderOtherProfile(v){
 const u=chats.find(x=>x.id===viewedUserId);if(!u){page='chats';render();return}
@@ -257,7 +350,24 @@ $('reportUser').onclick=()=>{const reason=prompt('Опиши причину жа
 }
 function addBubble(el,t,mine,time){const d=document.createElement('div');d.className='bubble'+(mine?' mine':'');d.innerHTML=esc(t)+'<time>'+time+'</time>';el.append(d)}
 function renderChatListOnly(){const q=$('chatSearch')?.value||'';const list=$('chatItems');if(!list)return;list.innerHTML='';chats.filter(c=>(c.name+c.last+c.user+(c.messages||[]).map(m=>m[0]).join(' ')).toLowerCase().includes(q.toLowerCase())).forEach(c=>{const b=document.createElement('button');b.className='chat-item'+(c.id===activeChat?' selected':'');b.innerHTML='<div class="avatar" style="background:'+c.color+'">'+c.initial+'</div><div class="chat-meta"><div class="chat-line"><span class="chat-name">'+esc(c.name)+'</span><span class="time">'+c.time+'</span></div><div class="last">'+esc(c.last)+'</div></div>';b.onclick=()=>openChat(c.id);list.append(b)})}
-function renderChannels(v){v.innerHTML='<h1 class="heading">Каналы NEXUS.</h1><p class="sub">Публичные пространства, где можно следить за интересными темами.</p><div class="toolbar"><div class="search"><input id="channelSearch" placeholder="Найти канал"></div><button class="pill" id="createChannel">＋ Создать канал</button></div><div class="cards" id="channelCards"></div>';function fill(q=''){const root=$('channelCards');root.innerHTML='';channels.filter(c=>c[0].toLowerCase().includes(q.toLowerCase())).forEach((c,i)=>{const d=document.createElement('article');d.className='panel channel';d.innerHTML='<div class="channel-top"><div class="channel-icon">'+c[3]+'</div><div><h3>'+c[0]+'</h3><small style="color:var(--muted)">Публичный канал</small></div></div><p>'+c[1]+'</p><div class="channel-foot"><span>'+c[2]+' подписчиков</span><button class="primary follow" data-id="'+i+'">'+(localStorage.getItem('follow'+i)==='1'?'Вы подписаны':'Подписаться')+'</button></div>';root.append(d)});$$('.follow').forEach(b=>b.onclick=()=>{const k='follow'+b.dataset.id;localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');fill($('channelSearch').value);toast(localStorage.getItem(k)==='1'?'Вы подписались на канал':'Подписка отменена')})}fill();$('channelSearch').oninput=e=>fill(e.target.value);$('createChannel').onclick=()=>toast('Создание каналов будет доступно после подключения серверной части.')}
+function renderChannels(v){
+v.innerHTML='<div class="messenger-page"><div class="messenger-heading"><div><h1 class="heading">Каналы</h1><p class="sub">Публикации и обновления от авторов</p></div><button class="compose-btn" id="createChannel" aria-label="Создать канал"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="toolbar"><div class="search"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="channelSearch" placeholder="Поиск каналов"></div></div><div class="channel-tabs"><button class="active" data-ctab="all">Все каналы</button><button data-ctab="following">Мои подписки</button></div><div class="channel-feed" id="channelCards"></div></div>';
+function art(i){const drawings=[
+'<svg viewBox="0 0 72 72" aria-hidden="true"><rect x="9" y="12" width="54" height="48" rx="15" fill="#244d70"/><path d="M22 47V29l14-8 14 8v18l-14 8z" fill="#77b5e6"/><path d="m22 29 14 8 14-8M36 37v18" fill="none" stroke="#d9efff" stroke-width="2"/><circle cx="53" cy="20" r="5" fill="#e4bd78"/></svg>',
+'<svg viewBox="0 0 72 72" aria-hidden="true"><rect x="9" y="9" width="54" height="54" rx="16" fill="#244b58"/><circle cx="36" cy="36" r="19" fill="none" stroke="#8cc6b2" stroke-width="2"/><path d="M36 17v38M17 36h38M23 23l26 26M49 23 23 49" stroke="#8cc6b2" stroke-width="1.5"/><circle cx="36" cy="36" r="6" fill="#d3e8ce"/></svg>',
+'<svg viewBox="0 0 72 72" aria-hidden="true"><rect x="9" y="9" width="54" height="54" rx="16" fill="#51405f"/><rect x="20" y="19" width="32" height="35" rx="5" fill="#d1b1db"/><path d="M26 28h20M26 35h14M26 42h17" stroke="#644c70" stroke-width="2.5" stroke-linecap="round"/><path d="m43 49 5 5 9-12" fill="none" stroke="#f0d7fa" stroke-width="3" stroke-linecap="round"/></svg>',
+'<svg viewBox="0 0 72 72" aria-hidden="true"><rect x="9" y="9" width="54" height="54" rx="16" fill="#63543b"/><circle cx="36" cy="34" r="17" fill="#e2bd73"/><path d="M36 20v28M22 34h28M26 24l20 20M46 24 26 44" stroke="#8b7044" stroke-width="1.5"/><circle cx="36" cy="34" r="5" fill="#fff0bd"/><path d="M24 55h24" stroke="#f1d9a5" stroke-width="3" stroke-linecap="round"/></svg>'
+];return drawings[i%drawings.length]}
+function fill(q='',tab='all'){
+const root=$('channelCards');root.innerHTML='';
+channels.filter((c,i)=>c[0].toLowerCase().includes(q.toLowerCase())&&(tab==='all'||localStorage.getItem('follow'+i)==='1')).forEach((c,i)=>{const original=channels.indexOf(c);const d=document.createElement('article');d.className='channel-row';d.innerHTML='<div class="channel-art">'+art(original)+'</div><div class="channel-copy"><div class="channel-title">'+esc(c[0])+'<span class="verified-mark" aria-label="Официальный канал"><svg viewBox="0 0 16 16"><path d="m3 8 3 3 7-7"/></svg></span></div><div class="channel-meta">'+c[2]+' подписчиков <span>·</span> Публичный канал</div><p>'+esc(c[1])+'</p></div><button class="follow-btn '+(localStorage.getItem('follow'+original)==='1'?'following':'')+'" data-id="'+original+'">'+(localStorage.getItem('follow'+original)==='1'?'Вы подписаны':'Подписаться')+'</button>';root.append(d)});
+if(!root.children.length)root.innerHTML='<div class="feed-empty"><div class="empty-drawing"><svg viewBox="0 0 120 100"><rect x="23" y="12" width="74" height="76" rx="14" fill="#1b3550" stroke="#426789"/><path d="M42 37h36M42 49h26M42 61h30" stroke="#85b6df" stroke-width="4" stroke-linecap="round"/><circle cx="87" cy="72" r="13" fill="#2c6090"/><path d="m81 72 4 4 8-9" fill="none" stroke="#d8edff" stroke-width="2.5"/></svg></div><b>Здесь пока пусто</b><span>Когда появятся подходящие каналы, они будут здесь</span></div>';
+$('.follow-btn').forEach(b=>b.onclick=()=>{const k='follow'+b.dataset.id;localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');fill($('channelSearch').value,$('.channel-tabs .active').dataset.ctab);toast(localStorage.getItem(k)==='1'?'Вы подписались на канал':'Подписка отменена')})
+}
+fill();$('channelSearch').oninput=e=>fill(e.target.value,$('.channel-tabs .active').dataset.ctab);
+$('.channel-tabs button').forEach(b=>b.onclick=()=>{$('.channel-tabs button').forEach(x=>x.classList.toggle('active',x===b));fill($('channelSearch').value,b.dataset.ctab)});
+$('createChannel').onclick=()=>toast('Создание каналов появится после подключения серверной части.');
+}
 function renderAI(v){v.innerHTML='<div class="ai-layout"><div class="ai-hero"><div class="ai-orb">✦</div><h2>NEXUS AI</h2><p class="sub">Твой интеллектуальный помощник внутри мессенджера.</p></div><div class="suggestions"><button>✧ Помоги придумать идею</button><button>⌘ Напиши текст</button><button>◈ Объясни сложную тему</button><button>↗ Составь план действий</button></div><div class="panel"><div class="ai-log" id="aiLog"><div class="bubble">Привет! Я NEXUS AI. Чем могу помочь?</div></div><form class="ai-input" id="aiForm"><textarea id="aiText" placeholder="Спроси о чём угодно…"></textarea><button class="send">➤</button></form></div><p class="sub" style="font-size:11px;text-align:center;margin-top:12px">Демо-режим: ответы имитируются локально. Для настоящего ИИ нужен API и сервер.</p></div>';const log=$('aiLog');$$('.suggestions button').forEach(b=>b.onclick=()=>{$('aiText').value=b.textContent.replace(/^\S+\s/,'');$('aiText').focus()});$('aiForm').onsubmit=e=>{e.preventDefault();const t=$('aiText').value.trim();if(!t)return;addBubble(log,t,true,'сейчас');$('aiText').value='';const reply='Я получил запрос: «'+t+'». В полноценной версии NEXUS AI сможет анализировать контекст и помогать с этой задачей. Сейчас это демонстрационный ответ — подключение языковой модели ещё не настроено.';setTimeout(()=>{addBubble(log,reply,false,'сейчас');log.scrollTop=log.scrollHeight},450);log.scrollTop=log.scrollHeight}}
 function renderProfile(v){
 v.innerHTML='<section class="panel profile-shell"><div class="profile-hero"><div class="cover-copy"><span class="cover-kicker">NEXUS / IDENTITY</span><strong>ТВОЁ ПРОСТРАНСТВО</strong><small>Оставайся на связи</small></div><div class="cover-orbit orbit-one"></div><div class="cover-orbit orbit-two"></div></div><div class="profile-card"><div class="profile-avatar-wrap"><div class="avatar profile-avatar" id="pAvatar">D</div><label class="avatar-edit" for="avatarFile" title="Изменить фото">✎</label><input id="avatarFile" type="file" accept="image/*" hidden></div><div class="profile-name" id="pName"></div><div class="username" id="pUser"></div><p class="bio" id="pBio"></p><div class="profile-actions"><button class="primary" id="editProfile">Редактировать профиль</button><button class="secondary" id="shareProfile">Поделиться</button></div><div id="profileEditor"></div><div class="profile-details"><div class="info-row"><span>Имя пользователя</span><b id="pInfoUser"></b></div><div class="info-row"><span>Номер телефона</span><b>Скрыт</b></div><div class="info-row"><span>Тип аккаунта</span><b>Личный</b></div><div class="info-row"><span>Статус</span><b class="status-online">● В сети</b></div></div></div></section><p class="sub profile-note">Твои данные хранятся только на этом устройстве в демо-версии NEXUS.</p>';
@@ -369,38 +479,6 @@ document.querySelectorAll('#mobileNav button').forEach(b=>{if(b.dataset.page==='
 const title=$('topTitle');if(title)title.textContent=({chats:'Чаты',channels:'Каналы',ai:'NEXUS AI',settings:'Настройки',profile:'Профиль'})[page]||'NEXUS';
 })();
 </script>
-<script>
-(()=>{ 
-const $=id=>document.getElementById(id);
-function section(symbol,title,desc){const d=document.createElement('div');d.className='nx-section';d.innerHTML='<span class="nx-symbol">'+symbol+'</span><div><b>'+title+'</b><small>'+desc+'</small></div><span class="nx-tail">›</span>';return d}
-function feature(icon,title,desc){const d=document.createElement('div');d.className='nx-feature';d.innerHTML='<i>'+icon+'</i><b>'+title+'</b><small>'+desc+'</small>';return d}
-function clean(v){v.querySelectorAll('.nx-section,.nx-stories,.nx-metrics,.nx-feature-grid,.nx-page-intro').forEach(x=>x.remove())}
-function enrich(p){
- const v=$('view');if(!v)return;clean(v);
- if(p==='chats'){
-  const h=v.querySelector('.heading');if(h){h.textContent='Сообщения';h.insertAdjacentHTML('afterend','<div class="nx-stories"><div class="nx-story"><i>＋</i>Добавить</div><div class="nx-story"><i>✦</i>NEXUS AI</div><div class="nx-story"><i>🎧</i>Музыка</div><div class="nx-story"><i>🌌</i>Космос</div><div class="nx-story"><i>⚡</i>Новости</div><div class="nx-story"><i>◈</i>Дизайн</div></div>')}
-  const list=v.querySelector('.chat-layout');if(list){const info=section('✦','Твои пространства NEXUS','Личные диалоги, групповые беседы и каналы собраны в одном месте.');list.before(info)}
- }
- if(p==='channels'){
-  const h=v.querySelector('.heading');if(h){const intro=section('◉','Открывай новые сообщества','Подписывайся на интересные темы и следи за обновлениями.');h.after(intro)}
-  const cards=$('channelCards');if(cards&&cards.children.length){const label=document.createElement('div');label.className='nx-page-intro';label.innerHTML='<h2 style="font-size:17px;margin:22px 0 10px">Рекомендуем посмотреть</h2><p class="sub" style="margin:0 0 12px">Подборка каналов NEXUS</p>';cards.before(label)}
- }
- if(p==='ai'){
-  const hero=v.querySelector('.ai-hero');if(hero){hero.insertAdjacentHTML('beforeend','<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px;z-index:1"><span class="pill">✦ Умный помощник</span><span class="pill">● Демо-режим</span></div>')}
-  const sug=v.querySelector('.suggestions');if(sug){const grid=document.createElement('div');grid.className='nx-feature-grid';grid.append(feature('✍️','Тексты и идеи','Черновики, сценарии и новые концепции'),feature('⌘','Объяснения','Разбор сложных тем простыми словами'),feature('▤','Планирование','Структура задач и пошаговые планы'));sug.before(grid)}
-  const log=$('aiLog');if(log){const cap=document.createElement('div');cap.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:4px 8px 12px;color:#9bb2cc;font-size:11px';cap.innerHTML='<b style="color:#dcecff">ВАШ ДИАЛОГ</b><span>Локальная демонстрация</span>';log.before(cap)}
- }
- if(p==='profile'){
-  const shell=v.querySelector('.profile-shell');if(shell){const metrics=document.createElement('div');metrics.className='nx-metrics';metrics.innerHTML='<div class="nx-metric"><strong>Активен</strong><small>Статус</small></div><div class="nx-metric"><strong>Личный</strong><small>Тип аккаунта</small></div><div class="nx-metric"><strong>NEXUS</strong><small>Твой профиль</small></div>';shell.after(metrics);shell.after(section('◈','Твоя цифровая карточка','Управляй именем, фотографией и информацией, которую видят собеседники.'))}
- }
- if(p==='settings'){
-  const grid=v.querySelector('.settings-grid');if(grid){grid.before(section('⚙','Всё под контролем','Персонализируй интерфейс, уведомления и приватность.'));const features=document.createElement('div');features.className='nx-feature-grid';features.append(feature('◐','Внешний вид','Тёмная, светлая и графитовая темы'),feature('◈','Приватность','Настройки видимости профиля'),feature('♢','Уведомления','Управление оповещениями'));grid.before(features)}
- }
-}
-const oldRender=window.render;if(typeof oldRender==='function'){window.render=function(){oldRender();enrich(typeof page!=='undefined'?page:'chats')}}
-const oldGo=window.go;if(typeof oldGo==='function'){window.go=function(p){oldGo(p);enrich(p);const t=$('topTitle');if(t)t.textContent=({chats:'Сообщения',channels:'Каналы',ai:'NEXUS AI',settings:'Настройки',profile:'Профиль'})[p]||'NEXUS'}}
-document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>enrich(window.page||'chats'),0)});
-})();
-</script>
+
 
 </body></html>
